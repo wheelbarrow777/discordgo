@@ -103,9 +103,10 @@ type ApplicationCommandOption struct {
 	// NOTE: This feature was on the API, but at some point developers decided to remove it.
 	// So I commented it, until it will be officially on the docs.
 	// Default     bool                              `json:"default"`
-	Required bool                              `json:"required"`
-	Choices  []*ApplicationCommandOptionChoice `json:"choices"`
-	Options  []*ApplicationCommandOption       `json:"options"`
+	Required     bool                              `json:"required"`
+	Choices      []*ApplicationCommandOptionChoice `json:"choices"`
+	Options      []*ApplicationCommandOption       `json:"options"`
+	ChannelTypes []ChannelType                     `json:"channel_types"`
 }
 
 // ApplicationCommandOptionChoice represents a slash command option choice.
@@ -454,7 +455,7 @@ type InteractionResponseData struct {
 
 // VerifyInteraction implements message verification of the discord interactions api
 // signing algorithm, as documented here:
-// https://discord.com/developers/docs/interactions/slash-commands#security-and-authorization
+// https://discord.com/developers/docs/interactions/receiving-and-responding#security-and-authorization
 func VerifyInteraction(r *http.Request, key ed25519.PublicKey) bool {
 	var msg bytes.Buffer
 
